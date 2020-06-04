@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import News from "./components/news/News";
-import "./App.css";
+import Categories from "./components/pages/Categories";
 
+import "./App.css";
 import axios from "axios";
 
 class App extends Component {
@@ -14,21 +16,33 @@ class App extends Component {
   async componentDidMount() {
     this.setState({ loading: true });
     const res = await axios.get(
-      "https://newsapi.org/v2/top-headlines?country=us&apiKey=0e82519178684ffeb3053725d423b89b"
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
     );
-
     this.setState({ news: res.data.articles, loading: false });
-    console.log(res.data.articles);
   }
 
   render() {
+    const { news, loading } = this.state;
     return (
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <News loading={this.state.loading} news={this.state.news} />
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <Fragment>
+                    <News loading={loading} news={news} />
+                  </Fragment>
+                )}
+              />
+              <Route exact path="/categories" component={Categories} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
