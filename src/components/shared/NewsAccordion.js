@@ -2,16 +2,16 @@ import React from "react";
 import { SubtractCircle, AddCircle } from "grommet-icons";
 import { Accordion, AccordionPanel, Box, Grommet, Text } from "grommet";
 
-const NewsAccordion = ({ animate, multiple, categories }) => (
+const NewsAccordion = ({ animate, multiple, categories, news }) => (
   <Grommet theme={customAccordionTheme}>
-    {categories.map((value) => {
-      console.log(value);
+    {categories.map((category) => {
+      console.log(category, news);
       return (
         <Box pad="large" align="center" justify="center">
           <Accordion animate={animate} multiple={multiple}>
-            <AccordionPanel label={value.title}>
+            <AccordionPanel label={category.name}>
               <Box background="light-2" height="xsmall">
-                <Text size="small">Important Info</Text>
+                <Text size="small">z</Text>
               </Box>
             </AccordionPanel>
           </Accordion>

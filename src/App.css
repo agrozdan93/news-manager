@@ -98,6 +98,10 @@ img {
   text-align: left;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 /* Center All */
 .all-center {
   display: flex;

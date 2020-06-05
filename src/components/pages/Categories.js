@@ -4,7 +4,8 @@ import NewsAccordion from "../shared/NewsAccordion";
 
 class Categories extends Component {
   state = {
-    categories: [],
+    news: [],
+    categories: [{ name: "Business" }, { name: "Health" }],
     loading: false,
   };
 
@@ -16,13 +17,11 @@ class Categories extends Component {
     const res2 = await axios.get(
       `https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
     );
-    console.log(res, res2);
-
-    const business = res.data.articles.slice(0, 5);
-    const health = res2.data.articles;
+    let business = res.data.articles.slice(0, 5);
+    let health = res2.data.articles.slice(0, 5);
 
     this.setState({
-      categories: business,
+      news: [business, health],
       loading: false,
     });
   }
@@ -34,6 +33,7 @@ class Categories extends Component {
           animate={true}
           multiple={true}
           categories={this.state.categories}
+          news={this.state.news}
         />
       </div>
     );

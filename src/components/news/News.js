@@ -8,6 +8,7 @@ const News = ({ loading, news }) => {
   if (loading) {
     return <Spinner />;
   } else {
+    console.log(news);
     return (
       <div style={newsCardStyle}>
         {news.map((news) => (

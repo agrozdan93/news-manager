@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 // import { Attraction, Car } from "grommet-icons";
 // import { grommet } from "grommet/themes";
 
-export const NavItems = () => (
+const NavItems = () => (
   <Box direction="row" gap="medium">
     <Link to="/">
-      <Anchor size="large" label="Top News" href="#" />
+      <Anchor size="medium" label="Top News" href="#" />
     </Link>
     <Link to="/categories">
-      <Anchor size="large" label="Categories" />
+      <Anchor size="medium" label="Categories" />
     </Link>
     <Link to="/search">
-      <Anchor size="large" label="Search" />
+      <Anchor size="medium" label="Search" />
     </Link>
   </Box>
 );
@@ -21,11 +21,11 @@ export const NavItems = () => (
 const Navbar = () => {
   return (
     <div theme={{ global: { colors: { doc: "#ff99cc" } } }} className="App">
-      <Header as="header" pad="small" elevation="small" height="xsmall">
+      <Header as="header" pad="small" elevation="small" height="xxsmall">
         <NavItems />
         <Box direction="row" gap="medium">
-          <Anchor size="large" label="GB" href="#" />
-          <Anchor size="large" label="US" href="#" />
+          <Anchor size="medium" label="GB" activated href="#" />
+          <Anchor size="medium" label="US" href="#" />
         </Box>
       </Header>
     </div>

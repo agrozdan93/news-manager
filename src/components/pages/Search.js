@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { TextInput } from "grommet";
+import { TextInput, Form } from "grommet";
 import News from "../news/News";
 
 class Search extends Component {
@@ -18,26 +18,36 @@ class Search extends Component {
     this.setState({ news: res.data.articles, loading: false });
   }
 
-  onChange = (e) => {
+  getUserInput = (e) => {
     this.setState({ userInput: e.target.value });
+    console.log(this.state.userInput);
+  };
+
+  onChange = () => {
+    console.log("method on change");
+    //   this.props.searchNews(this.state.userInput);
   };
 
   render() {
     const { loading, news, userInput } = this.state;
     return (
       <div className="p-2">
-        <TextInput
-          placeholder="Search news"
-          value={userInput}
-          onChange={this.onChange}
-        />
-        <div>
-          {userInput ? (
-            <News loading={loading} news={news} />
-          ) : (
-            <News loading={loading} news={[]} />
-          )}
-        </div>
+        <Form onChange={this.onChange}>
+          <TextInput
+            name="text"
+            placeholder="Search news"
+            value={userInput}
+            onChange={this.getUserInput}
+          />
+          <div>
+            {userInput}
+            {userInput ? (
+              <News loading={loading} news={news} />
+            ) : (
+              <News loading={loading} news={[]} />
+            )}
+          </div>
+        </Form>
       </div>
     );
   }
