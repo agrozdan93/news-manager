@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import News from "./components/news/News";
 import Categories from "./components/pages/Categories";
+import Search from "./components/pages/Search";
 
 import "./App.css";
 import axios from "axios";
@@ -39,6 +40,7 @@ class App extends Component {
                 )}
               />
               <Route exact path="/categories" component={Categories} />
+              <Route exact path="/search" component={Search} />
             </Switch>
           </div>
         </div>

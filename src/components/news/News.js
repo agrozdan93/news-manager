@@ -4,6 +4,7 @@ import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
 
 const News = ({ loading, news }) => {
+  let key = 0;
   if (loading) {
     return <Spinner />;
   } else {
@@ -30,7 +31,5 @@ News.propTypes = {
   news: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
 };
-
-let key = 0;
 
 export default News;
