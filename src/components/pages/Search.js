@@ -8,6 +8,7 @@ class Search extends Component {
     loading: false,
     news: [],
     userInput: "",
+    searchedNews: [],
   };
 
   async componentDidMount() {
@@ -20,16 +21,26 @@ class Search extends Component {
 
   getUserInput = (e) => {
     this.setState({ userInput: e.target.value });
-    console.log(this.state.userInput);
   };
 
   onChange = () => {
-    console.log("method on change");
-    //   this.props.searchNews(this.state.userInput);
+    this.setState({ loading: true });
+    // console.log("method on change", this.state.userInput, this.state.news);
+    let matchedNews = [];
+    this.state.news.map((news) => {
+      if (news.title.match(`${this.state.userInput}`)) {
+        matchedNews.push(news);
+      }
+    });
+    console.log(matchedNews);
+    this.setState({
+      searchedNews: matchedNews,
+      loading: false,
+    });
   };
 
   render() {
-    const { loading, news, userInput } = this.state;
+    const { loading, news, searchedNews, userInput } = this.state;
     return (
       <div className="p-2">
         <Form onChange={this.onChange}>
@@ -42,7 +53,7 @@ class Search extends Component {
           <div>
             {userInput}
             {userInput ? (
-              <News loading={loading} news={news} searchNews={userInput} />
+              <News loading={loading} news={searchedNews} />
             ) : (
               <News loading={loading} news={[]} />
             )}

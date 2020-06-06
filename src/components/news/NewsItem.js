@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Button } from "grommet";
+import { Box, Button, Anchor } from "grommet";
 import { Link } from "react-router-dom";
 
 const NewsItem = ({ news: { title, description, urlToImage }, id }) => {
@@ -16,10 +16,22 @@ const NewsItem = ({ news: { title, description, urlToImage }, id }) => {
       />
 
       <div>
-        <p className="text-justify"> {description}</p>
+        <p className="text-justify">
+          {description}
+          <Link to={`/news/${id}`}>
+            <Anchor
+              label="View more"
+              size="small"
+              alignSelf="center"
+              href="#"
+            />
+          </Link>
+        </p>
       </div>
-
-      <div>
+      {/* <p className="text-justify" style={{ fontSize: "15px" }}>
+        {description}
+      </p> */}
+      {/* <div>
         <Box align="center" pad="medium">
           <Link to={`/news/${id}`}>
             <Button
@@ -30,9 +42,7 @@ const NewsItem = ({ news: { title, description, urlToImage }, id }) => {
             />
           </Link>
         </Box>
-      </div>
-      {/* <div className="btn btn-sm btn-dark my-1"> Read more</div>
-       */}
+      </div> */}
     </div>
   );
 };

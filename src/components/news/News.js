@@ -3,40 +3,27 @@ import NewsItem from "./NewsItem";
 import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
 
-const News = ({ loading, news, searchNews }) => {
+const News = ({ loading, news }) => {
   let key = 0;
   if (loading) {
     return <Spinner />;
   } else {
-    if (searchNews) {
-      return (
-        <div style={newsCardStyle}>
-          {/* {news.map((news) => (
-            <NewsItem
-              key={news.source.id == null ? key++ : news.source.id}
-              news={news}
-            />
-          ))} */}
-        </div>
-      );
-    } else {
-      console.log(news);
-      return (
-        <div style={newsCardStyle}>
-          {news.map((news) => (
-            <NewsItem
-              key={
-                news.source.id === null || news.source.id === news.source.id
-                  ? key++
-                  : news.source.id
-              }
-              id={key}
-              news={news}
-            />
-          ))}
-        </div>
-      );
-    }
+    console.log(news);
+    return (
+      <div style={newsCardStyle}>
+        {news.map((news) => (
+          <NewsItem
+            key={
+              news.source.id === null || news.source.id === news.source.id
+                ? key++
+                : news.source.id
+            }
+            id={key}
+            news={news}
+          />
+        ))}
+      </div>
+    );
   }
 };
 

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Spinner from "../layout/Spinner";
+import { Box, Button, Anchor } from "grommet";
+import { Link } from "react-router-dom";
 
 class SingleNews extends Component {
   componentDidMount() {
@@ -8,7 +10,7 @@ class SingleNews extends Component {
   }
 
   render() {
-    const { title, urlToImage, description } = this.props.singleNews;
+    const { title, urlToImage, content } = this.props.singleNews;
     const { loading } = this.props;
     if (loading) {
       return <Spinner />;
@@ -19,27 +21,20 @@ class SingleNews extends Component {
           <img
             src={urlToImage}
             alt="someImage"
-            style={{ width: "100%", height: "180px" }}
+            style={{ width: "100%", height: "auto" }}
           />
 
           <div>
-            <p className="text-justify"> {description}</p>
+            <p className="text-justify"> * {content}</p>
           </div>
 
-          {/* <div>
-              <Box align="center" pad="medium">
-                <Link to={`/news/${id}`}>
-                  <Button
-                    label="Read More"
-                    size="small"
-                    alignSelf="center"
-                    href="#"
-                  />
-                </Link>
-              </Box>
-            </div> */}
-          {/* <div className="btn btn-sm btn-dark my-1"> Read more</div>
-           */}
+          <div>
+            <Box align="start" pad="medium">
+              <Link to="/">
+                <Anchor label="Back to news" size="xsmall" href="#" />
+              </Link>
+            </Box>
+          </div>
         </div>
       );
     }

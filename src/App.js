@@ -34,13 +34,6 @@ class App extends Component {
         });
       }
     });
-    // console.log(id, this.state);
-    // console.log(this.state.news.indexOf(id - 1) === -1 ? "naso ga" : "nije");
-
-    // this.setState({
-    //   singleNews: { title: "1", desc: "2", content: "3" },
-    //   loading: false,
-    // });
   };
 
   render() {
