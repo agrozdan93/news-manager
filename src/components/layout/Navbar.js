@@ -24,8 +24,8 @@ const Navbar = () => {
       <Header as="header" pad="small" elevation="small" height="xxsmall">
         <NavItems />
         <Box direction="row" gap="medium">
-          <Anchor size="medium" label="GB" activated href="#" />
-          <Anchor size="medium" label="US" href="#" />
+          <Button size="small" label="GB" active path="#" />
+          <Button size="small" label="US" href="#" />
         </Box>
       </Header>
     </div>

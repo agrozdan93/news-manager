@@ -21,7 +21,7 @@ class Categories extends Component {
     let health = res2.data.articles.slice(0, 5);
 
     this.setState({
-      news: [business, health],
+      news: [{ category: "business", business: business }, health],
       loading: false,
     });
   }

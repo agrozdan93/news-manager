@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import News from "./components/news/News";
+import SingleNews from "./components/news/SingleNews";
 import Categories from "./components/pages/Categories";
 import Search from "./components/pages/Search";
 
@@ -11,6 +12,7 @@ import axios from "axios";
 class App extends Component {
   state = {
     news: [],
+    singleNews: {},
     loading: false,
   };
 
@@ -22,8 +24,27 @@ class App extends Component {
     this.setState({ news: res.data.articles, loading: false });
   }
 
+  getSingleNews = (id) => {
+    this.setState({ loading: true });
+    this.state.news.find((news, index) => {
+      if (index === parseInt(id) - 1) {
+        this.setState({
+          singleNews: news,
+          loading: false,
+        });
+      }
+    });
+    // console.log(id, this.state);
+    // console.log(this.state.news.indexOf(id - 1) === -1 ? "naso ga" : "nije");
+
+    // this.setState({
+    //   singleNews: { title: "1", desc: "2", content: "3" },
+    //   loading: false,
+    // });
+  };
+
   render() {
-    const { news, loading } = this.state;
+    const { news, loading, singleNews } = this.state;
     return (
       <Router>
         <div className="App">
@@ -41,6 +62,20 @@ class App extends Component {
               />
               <Route exact path="/categories" component={Categories} />
               <Route exact path="/search" component={Search} />
+              <Route
+                exact
+                path="/news/:id"
+                render={(props) => (
+                  <Fragment>
+                    <SingleNews
+                      getSingleNews={this.getSingleNews}
+                      singleNews={singleNews}
+                      loading={loading}
+                      {...props}
+                    />
+                  </Fragment>
+                )}
+              />
             </Switch>
           </div>
         </div>

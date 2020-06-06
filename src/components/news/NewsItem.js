@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Button } from "grommet";
+import { Link } from "react-router-dom";
 
-const NewsItem = ({ news: { title, description, urlToImage } }) => {
+const NewsItem = ({ news: { title, description, urlToImage }, id }) => {
   return (
     <div className="card text-center">
       <p className="lead">
@@ -20,7 +21,14 @@ const NewsItem = ({ news: { title, description, urlToImage } }) => {
 
       <div>
         <Box align="center" pad="medium">
-          <Button label="Read More" size="small" alignSelf="end" href="#" />
+          <Link to={`/news/${id}`}>
+            <Button
+              label="Read More"
+              size="small"
+              alignSelf="center"
+              href="#"
+            />
+          </Link>
         </Box>
       </div>
       {/* <div className="btn btn-sm btn-dark my-1"> Read more</div>

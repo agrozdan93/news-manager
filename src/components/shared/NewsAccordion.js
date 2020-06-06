@@ -5,7 +5,7 @@ import { Accordion, AccordionPanel, Box, Grommet, Text } from "grommet";
 const NewsAccordion = ({ animate, multiple, categories, news }) => (
   <Grommet theme={customAccordionTheme}>
     {categories.map((category) => {
-      console.log(category, news);
+      console.log(category, news.category);
       return (
         <Box pad="large" align="center" justify="center">
           <Accordion animate={animate} multiple={multiple}>

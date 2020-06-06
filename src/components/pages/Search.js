@@ -42,7 +42,7 @@ class Search extends Component {
           <div>
             {userInput}
             {userInput ? (
-              <News loading={loading} news={news} />
+              <News loading={loading} news={news} searchNews={userInput} />
             ) : (
               <News loading={loading} news={[]} />
             )}
