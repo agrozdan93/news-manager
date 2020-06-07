@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { Box, Button, Anchor } from "grommet";
 import { Link } from "react-router-dom";
 
-const NewsItem = ({ news: { title, description, urlToImage }, id }) => {
+const NewsItem = ({
+  news: { title, description, urlToImage, source },
+  id,
+  key,
+}) => {
   return (
     <div className="card text-center">
       <p className="lead">

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import NewsAccordion from "../shared/NewsAccordion";
+// import NewsCarousel from "../shared/NewsCarousel";
 
 class Categories extends Component {
   state = {
     news: [],
-    categories: [{ name: "Business" }, { name: "Health" }],
+    categories: ["business", "health"],
     loading: false,
   };
 
@@ -21,7 +22,10 @@ class Categories extends Component {
     let health = res2.data.articles.slice(0, 5);
 
     this.setState({
-      news: [{ category: "business", business: business }, health],
+      news: [
+        { category: "business", business: business },
+        { category: "health", health: health },
+      ],
       loading: false,
     });
   }
@@ -34,7 +38,10 @@ class Categories extends Component {
           multiple={true}
           categories={this.state.categories}
           news={this.state.news}
-        />
+        >
+          {/* <NewsCarousel controls="true" news={this.state.news} /> */}
+          <p>sad</p>
+        </NewsAccordion>
       </div>
     );
   }

@@ -1,14 +1,13 @@
 import React from "react";
-import { Grommet, Box, Header, Anchor, Text, Button, Grid } from "grommet";
+import { Box, Header, Anchor, Button } from "grommet";
 import { Link } from "react-router-dom";
 // import { Attraction, Car } from "grommet-icons";
 // import { grommet } from "grommet/themes";
 
 const NavItems = () => (
   <Box direction="row" gap="medium">
-    <Link to="/">
-      <Anchor size="medium" label="Top News" href="#" />
-    </Link>
+    <Anchor size="medium" label="Top News" href="/" />
+
     <Link to="/categories">
       <Anchor size="medium" label="Categories" />
     </Link>
@@ -24,8 +23,8 @@ const Navbar = () => {
       <Header as="header" pad="small" elevation="small" height="xxsmall">
         <NavItems />
         <Box direction="row" gap="medium">
-          <Button size="small" label="GB" active path="#" />
-          <Button size="small" label="US" href="#" />
+          <Button size="small" label="GB" active />
+          <Button size="small" label="US" />
         </Box>
       </Header>
     </div>

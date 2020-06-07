@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import News from "./components/news/News";
@@ -6,39 +6,41 @@ import SingleNews from "./components/news/SingleNews";
 import Categories from "./components/pages/Categories";
 import Search from "./components/pages/Search";
 
+import NewsState from "./components/context/news/NewsState";
+
 import "./App.css";
 import axios from "axios";
 
-class App extends Component {
-  state = {
-    news: [],
-    singleNews: {},
-    loading: false,
-  };
+const App = () => {
+  const [news, setNews] = useState([]);
+  const [singleNews, setSingleNews] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  async componentDidMount() {
-    this.setState({ loading: true });
-    const res = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
-    );
-    this.setState({ news: res.data.articles, loading: false });
-  }
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
+      )
+      .then((res) => {
+        setNews(res.data.articles);
+        setLoading(false);
+      })
+      .catch((err) => console.log);
+  }, []);
 
-  getSingleNews = (id) => {
-    this.setState({ loading: true });
-    this.state.news.find((news, index) => {
+  const getSingleNews = (id) => {
+    setLoading(true);
+    news.find((news, index) => {
       if (index === parseInt(id) - 1) {
-        this.setState({
-          singleNews: news,
-          loading: false,
-        });
+        setSingleNews(news);
+        setLoading(false);
       }
     });
   };
 
-  render() {
-    const { news, loading, singleNews } = this.state;
-    return (
+  return (
+    <NewsState>
       <Router>
         <div className="App">
           <Navbar />
@@ -61,7 +63,7 @@ class App extends Component {
                 render={(props) => (
                   <Fragment>
                     <SingleNews
-                      getSingleNews={this.getSingleNews}
+                      getSingleNews={getSingleNews}
                       singleNews={singleNews}
                       loading={loading}
                       {...props}
@@ -73,8 +75,8 @@ class App extends Component {
           </div>
         </div>
       </Router>
-    );
-  }
-}
+    </NewsState>
+  );
+};
 
 export default App;

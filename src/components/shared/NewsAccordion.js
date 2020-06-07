@@ -1,17 +1,23 @@
 import React from "react";
 import { SubtractCircle, AddCircle } from "grommet-icons";
-import { Accordion, AccordionPanel, Box, Grommet, Text } from "grommet";
+import { Accordion, AccordionPanel, Box, Grommet, Carousel } from "grommet";
+
+// import NewsCarousel from "./NewsCarousel";
 
 const NewsAccordion = ({ animate, multiple, categories, news }) => (
   <Grommet theme={customAccordionTheme}>
     {categories.map((category) => {
-      console.log(category, news.category);
+      console.log(category, news);
       return (
         <Box pad="large" align="center" justify="center">
           <Accordion animate={animate} multiple={multiple}>
-            <AccordionPanel label={category.name}>
-              <Box background="light-2" height="xsmall">
-                <Text size="small">z</Text>
+            <AccordionPanel label={category}>
+              {/* <NewsCarousel controls={"selectors"} news={news} /> */}
+              <Box align="center" pad="large">
+                <Carousel controls={true}>
+                  <p> {news.category}</p>
+                  );
+                </Carousel>
               </Box>
             </AccordionPanel>
           </Accordion>

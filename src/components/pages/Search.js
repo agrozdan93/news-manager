@@ -25,10 +25,9 @@ class Search extends Component {
 
   onChange = () => {
     this.setState({ loading: true });
-    // console.log("method on change", this.state.userInput, this.state.news);
     let matchedNews = [];
     this.state.news.map((news) => {
-      if (news.title.match(`${this.state.userInput}`)) {
+      if (news.title.toLowerCase().match(`${this.state.userInput}`)) {
         matchedNews.push(news);
       }
     });
@@ -40,7 +39,7 @@ class Search extends Component {
   };
 
   render() {
-    const { loading, news, searchedNews, userInput } = this.state;
+    const { loading, searchedNews, userInput } = this.state;
     return (
       <div className="p-2">
         <Form onChange={this.onChange}>
@@ -51,7 +50,6 @@ class Search extends Component {
             onChange={this.getUserInput}
           />
           <div>
-            {userInput}
             {userInput ? (
               <News loading={loading} news={searchedNews} />
             ) : (
