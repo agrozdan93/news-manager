@@ -1,65 +1,64 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { TextInput, Form } from "grommet";
 import News from "../news/News";
 
-class Search extends Component {
-  state = {
-    loading: false,
-    news: [],
-    userInput: "",
-    searchedNews: [],
+const Search = () => {
+  const [news, setNews] = useState([]);
+  const [searchedNews, setSearchedNews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [userInput, setUserInput] = useState("");
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(
+        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
+      )
+      .then((res) => {
+        setNews(res.data.articles);
+        setLoading(false);
+      })
+      .catch((err) => console.log);
+  }, []);
+
+  const getUserInput = (e) => {
+    setUserInput(e.target.value);
   };
 
-  async componentDidMount() {
-    this.setState({ loading: true });
-    const res = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
-    );
-    this.setState({ news: res.data.articles, loading: false });
-  }
-
-  getUserInput = (e) => {
-    this.setState({ userInput: e.target.value });
-  };
-
-  onChange = () => {
-    this.setState({ loading: true });
+  const onChange = () => {
+    setLoading(true);
     let matchedNews = [];
-    this.state.news.map((news) => {
-      if (news.title.toLowerCase().match(`${this.state.userInput}`)) {
+    news.map((news) => {
+      if (news.title.toLowerCase().match(`${userInput}`)) {
         matchedNews.push(news);
       }
+      return matchedNews;
     });
-    console.log(matchedNews);
-    this.setState({
-      searchedNews: matchedNews,
-      loading: false,
-    });
+    // console.log(matchedNews);
+    setSearchedNews(matchedNews);
+    setLoading(false);
   };
 
-  render() {
-    const { loading, searchedNews, userInput } = this.state;
-    return (
-      <div className="p-2">
-        <Form onChange={this.onChange}>
-          <TextInput
-            name="text"
-            placeholder="Search news"
-            value={userInput}
-            onChange={this.getUserInput}
-          />
-          <div>
-            {userInput ? (
-              <News loading={loading} news={searchedNews} />
-            ) : (
-              <News loading={loading} news={[]} />
-            )}
-          </div>
-        </Form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="p-2">
+      <Form onChange={onChange}>
+        <TextInput
+          name="text"
+          placeholder="Search news"
+          value={userInput}
+          onChange={getUserInput}
+        />
+        <div>
+          {userInput ? (
+            <News loading={loading} news={searchedNews} />
+          ) : (
+            <News loading={loading} news={[]} />
+          )}
+        </div>
+      </Form>
+    </div>
+  );
+};
 
 export default Search;

@@ -13,6 +13,7 @@ const NewsState = (props) => {
   const initialState = {
     news: [],
     singleNews: [],
+    searchedNews: {},
     loading: false,
   };
 
@@ -33,12 +34,19 @@ const NewsState = (props) => {
       .catch((err) => console.log);
   }, []);
   // Get News
+  const setNews = () => dispatch({ type: GET_NEWS });
 
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
-    <NewsContext.Provider value={{ news: state.news, loading: state.loading }}>
+    <NewsContext.Provider
+      value={{
+        news: state.news,
+        loading: state.loading,
+        searchedNews: state.searchedNews,
+      }}
+    >
       {props.children}
     </NewsContext.Provider>
   );
