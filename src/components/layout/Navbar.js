@@ -1,11 +1,10 @@
-import React, { useEffect, setState, useState } from "react";
+import React from "react";
 import { Box, Header, Anchor, Button } from "grommet";
 import { Link } from "react-router-dom";
 
 const NavItems = () => (
   <Box direction="row" gap="medium">
     <Anchor size="medium" label="Top News" href="/" />
-
     <Link to="/categories">
       <Anchor size="medium" label="Categories" />
     </Link>
@@ -16,12 +15,8 @@ const NavItems = () => (
 );
 
 const Navbar = ({ chooseStateForNewsData, select }) => {
-  // const [select] = useState(Boolean);
-
   const handleClick = (e) => {
-    console.log("handled", e, e.target.innerText, select);
     chooseStateForNewsData(e.target.innerText);
-    e.persist();
   };
 
   return (
@@ -35,7 +30,6 @@ const Navbar = ({ chooseStateForNewsData, select }) => {
           <Link to="/">
             <Button size="small" label="DE" onClick={handleClick} />
           </Link>
-          {/* <Button size="small" label="US" /> */}
         </Box>
       </Header>
     </div>

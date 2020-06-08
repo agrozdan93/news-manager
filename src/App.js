@@ -1,13 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { NewsProvider } from "./components/context/news/newsContext";
+
 import Navbar from "./components/layout/Navbar";
 import News from "./components/news/News";
 import SingleNews from "./components/news/SingleNews";
 import Categories from "./components/pages/Categories";
 import Search from "./components/pages/Search";
-
-// import NewsState from "./components/context/news/NewsState";
-import { NewsProvider } from "./components/context/news/newsContext";
 
 import "./App.css";
 import axios from "axios";
@@ -62,27 +61,26 @@ const App = () => {
   }, []);
 
   const chooseStateForNewsData = (lang) => {
-    // if (lang === "US") {
-    //   axios.get(apiUrl).then((res) => {
-    //     setNews(
-    //       res.data.articles.map((singleNews) => {
-    //         singleNews.id = createGuid();
-    //         return singleNews;
-    //       })
-    //     );
-    //   });
-    //   setLangauge("US");
-    // } else {
-    //   axios.get(apiUrl).then((res) => {
-    //     setNews(
-    //       res.data.articles.map((singleNews) => {
-    //         singleNews.id = createGuid();
-    //         return singleNews;
-    //       })
-    //     );
-    //   });
-    //   setLangauge("US");
-    // }
+    if (lang === "US") {
+      axios.get(apiUrl).then((res) => {
+        setNews(
+          res.data.articles.map((singleNews) => {
+            singleNews.id = createGuid();
+            return singleNews;
+          })
+        );
+      });
+    } else {
+      axios.get(apiUrl).then((res) => {
+        setNews(
+          res.data.articles.map((singleNews) => {
+            singleNews.id = createGuid();
+            return singleNews;
+          })
+        );
+      });
+    }
+    setLangauge(lang);
   };
 
   const getSingleNews = (id) => {
@@ -113,7 +111,6 @@ const App = () => {
               )}
             />
             <Route exact path="/categories" component={Categories} />
-            {/* <Route exact path="/search" component={Search} /> */}
             <Route
               exact
               path="/search"

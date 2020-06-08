@@ -1,13 +1,5 @@
 import React from "react";
-import { Attraction, Car, TreeOption } from "grommet-icons";
-import {
-  AccordionPanel,
-  Accordion,
-  Grommet,
-  Box,
-  Carousel,
-  Image,
-} from "grommet";
+import { AccordionPanel, Accordion, Grommet, Box } from "grommet";
 
 const NewsCarousel = ({ category, news }) => (
   <Grommet>
@@ -26,20 +18,20 @@ const NewsCarousel = ({ category, news }) => (
   </Grommet>
 );
 
-const customTheme = {
-  carousel: {
-    animation: {
-      duration: 400,
-    },
-    icons: {
-      color: "blue",
-    },
-    disabled: {
-      icons: {
-        color: "grey",
-      },
-    },
-  },
-};
+// const customTheme = {
+//   carousel: {
+//     animation: {
+//       duration: 400,
+//     },
+//     icons: {
+//       color: "blue",
+//     },
+//     disabled: {
+//       icons: {
+//         color: "grey",
+//       },
+//     },
+//   },
+// };
 
 export default NewsCarousel;

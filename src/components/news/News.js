@@ -2,23 +2,24 @@ import React, { useContext } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "../layout/Spinner";
 import NewsContext from "../context/news/newsContext";
-import styled from "styled-components";
-import media from "styled-media-query";
+// import styled from "styled-components";
+// import media from "styled-media-query";
 
 const News = ({ loading, searchedNews }) => {
   const newsList = useContext(NewsContext);
-  const searchedNewsFromContext = useContext(NewsContext);
+  // const searchedNewsFromContext = useContext(NewsContext);
 
-  console.log(
-    "searched",
-    searchedNews,
-    "newslist",
-    newsList,
-    "searched from context",
-    searchedNewsFromContext
-  );
+  // console.log(
+  //   "searched",
+  //   searchedNews,
+  //   "newslist",
+  //   newsList,
+  //   "searched from context",
+  //   searchedNewsFromContext
+  // );
 
   let matchedNews = [];
+
   if (searchedNews) {
     newsList.news.map((news) => {
       searchedNews.map((singleNews) => {
@@ -28,8 +29,6 @@ const News = ({ loading, searchedNews }) => {
       });
     });
   }
-  console.log(matchedNews);
-
   if (loading) {
     return <Spinner />;
   } else {

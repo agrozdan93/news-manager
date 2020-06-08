@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Anchor } from "grommet";
+import { Anchor } from "grommet";
 import { Link } from "react-router-dom";
 
 const NewsItem = ({ news: { title, description, urlToImage, source, id } }) => {

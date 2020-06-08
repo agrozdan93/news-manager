@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import NewsAccordion from "../shared/NewsAccordion";
-// import NewsCarousel from "../shared/NewsCarousel";
 
 class Categories extends Component {
   state = {
@@ -19,10 +18,7 @@ class Categories extends Component {
       `https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
     );
     let business = res.data.articles.slice(0, 5);
-    // business.category = "business";
-
     let health = res2.data.articles.slice(0, 5);
-    // health.category = "health";
 
     this.setState({
       news: [business, health],
@@ -39,8 +35,7 @@ class Categories extends Component {
           categories={this.state.categories}
           news={this.state.news}
         >
-          {/* <NewsCarousel controls="true" news={this.state.news} /> */}
-          <p>sad</p>
+          <p>something</p>
         </NewsAccordion>
       </div>
     );

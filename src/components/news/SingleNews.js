@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const SingleNews = ({ singleNews, getSingleNews, loading, match }) => {
   useEffect(() => {
-    console.log(singleNews, loading, getSingleNews, match);
     getSingleNews(match.params.id);
   }, []);
 
