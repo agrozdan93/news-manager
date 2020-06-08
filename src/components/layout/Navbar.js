@@ -30,20 +30,10 @@ const Navbar = ({ chooseStateForNewsData, select }) => {
         <NavItems />
         <Box direction="row" gap="medium">
           <Link to="/">
-            <Button
-              size="small"
-              primary={handleClick}
-              label="US"
-              onClick={handleClick}
-            />
+            <Button size="small" label="US" onClick={handleClick} />
           </Link>
           <Link to="/">
-            <Button
-              size="small"
-              label="GB"
-              primary={handleClick}
-              onClick={handleClick}
-            />
+            <Button size="small" label="DE" onClick={handleClick} />
           </Link>
           {/* <Button size="small" label="US" /> */}
         </Box>

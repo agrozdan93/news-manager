@@ -38,13 +38,17 @@ const App = () => {
   const [news, setNews] = useState([]);
   const [singleNews, setSingleNews] = useState({});
   const [loading, setLoading] = useState(false);
+  const [langauge, setLangauge] = useState("US");
+
+  const apiUrl =
+    langauge === "US"
+      ? `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
+      : `https://newsapi.org/v2/top-headlines?country=de&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`;
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
-      )
+      .get(apiUrl)
       .then((res) => {
         setNews(
           res.data.articles.map((singleNews) => {
@@ -56,6 +60,30 @@ const App = () => {
       })
       .catch((err) => console.log);
   }, []);
+
+  const chooseStateForNewsData = (lang) => {
+    // if (lang === "US") {
+    //   axios.get(apiUrl).then((res) => {
+    //     setNews(
+    //       res.data.articles.map((singleNews) => {
+    //         singleNews.id = createGuid();
+    //         return singleNews;
+    //       })
+    //     );
+    //   });
+    //   setLangauge("US");
+    // } else {
+    //   axios.get(apiUrl).then((res) => {
+    //     setNews(
+    //       res.data.articles.map((singleNews) => {
+    //         singleNews.id = createGuid();
+    //         return singleNews;
+    //       })
+    //     );
+    //   });
+    //   setLangauge("US");
+    // }
+  };
 
   const getSingleNews = (id) => {
     setLoading(true);
@@ -70,7 +98,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Navbar chooseStateForNewsData={chooseStateForNewsData} />
         <div className="container">
           <Switch>
             <Route

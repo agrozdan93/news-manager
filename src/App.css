@@ -142,6 +142,11 @@ img {
 .p-3 {
   padding: 3rem;
 }
+
+.pt-1 {
+  padding: 10px;
+}
+
 .py {
   padding: 0.5rem 0;
 }

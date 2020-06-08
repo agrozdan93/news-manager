@@ -28,21 +28,6 @@ const NewsItem = ({ news: { title, description, urlToImage, source, id } }) => {
           </Link>
         </p>
       </div>
-      {/* <p className="text-justify" style={{ fontSize: "15px" }}>
-        {description}
-      </p> */}
-      {/* <div>
-        <Box align="center" pad="medium">
-          <Link to={`/news/${id}`}>
-            <Button
-              label="Read More"
-              size="small"
-              alignSelf="center"
-              href="#"
-            />
-          </Link>
-        </Box>
-      </div> */}
     </div>
   );
 };

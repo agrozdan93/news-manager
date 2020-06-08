@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import Spinner from "../layout/Spinner";
 import axios from "axios";
 import { TextInput, Form } from "grommet";
 import News from "../news/News";
@@ -9,7 +10,7 @@ const Search = () => {
   const [news, setNews] = useState([]);
   const [searchedNews, setSearchedNews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState(" ");
 
   const newsList = useContext(NewsContext);
 
@@ -37,7 +38,10 @@ const Search = () => {
 
   useEffect(() => {
     console.log("Search", newsList);
-    // setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    setLoading(true);
     // axios
     //   .get(
     //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
@@ -59,38 +63,49 @@ const Search = () => {
   const onChange = () => {
     setLoading(true);
     let matchedNews = [];
-    news.map((news) => {
-      if (news.title.toLowerCase().match(`${userInput}`)) {
-        matchedNews.push(news);
+    newsList.news.map((singleNews) => {
+      if (singleNews.title.toLowerCase().match(`${userInput}`)) {
+        matchedNews.push(singleNews);
+        console.log("single", singleNews);
       }
       return matchedNews;
     });
-    // console.log(matchedNews);
     setSearchedNews(matchedNews);
     setLoading(false);
+    // console.log(matchedNews);
+    // console.log("menja se", newsList.news);
   };
 
-  return (
-    <div className="p-2">
-      <Form onChange={onChange}>
-        <TextInput
-          name="text"
-          placeholder="Search news"
-          value={userInput}
-          onChange={getUserInput}
-        />
-        <div>
-          {userInput ? (
-            <NewsContext value={searchedNews}>
-              <News loading={loading} />
-            </NewsContext>
-          ) : (
-            <News loading={loading} news={[]} />
-          )}
-        </div>
-      </Form>
-    </div>
-  );
+  if (loading) {
+    return <Spinner />;
+  } else {
+    return (
+      <div className="pt-1">
+        <Form onChange={onChange}>
+          <TextInput
+            name="text"
+            placeholder="Search news"
+            value={userInput}
+            onChange={getUserInput}
+          />
+          <div>
+            {/* {userInput ? (
+              // <NewsContext value={searchedNews}>
+              //   <News loading={loading} />
+              // </NewsContext>
+           // ) : (
+              // <News loading={loading} news={[]} />
+           // )} */}
+            {userInput ? (
+              <News loading={loading} searchedNews={searchedNews} />
+            ) : (
+              <News loading={loading} searchedNews={[]} />
+            )}
+          </div>
+        </Form>
+      </div>
+    );
+  }
 };
 
 export default Search;
