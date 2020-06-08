@@ -1,24 +1,30 @@
 import React from "react";
 import { Attraction, Car, TreeOption } from "grommet-icons";
-import { Grommet, Box, Carousel } from "grommet";
+import {
+  AccordionPanel,
+  Accordion,
+  Grommet,
+  Box,
+  Carousel,
+  Image,
+} from "grommet";
 
-const NewsCarousel = ({ controls, news }) => {
-  return (
-    <div>
-      {/* <Box align="center" pad="large">
-        <Carousel controls={controls}>
-          {news.map((news) => {
-            return (
-              <Box pad="xlarge" background="accent-1">
-                <Attraction size="xlarge" /> {news.title}
-              </Box>
-            );
-          })}
-        </Carousel>
-      </Box> */}
-    </div>
-  );
-};
+const NewsCarousel = ({ category, news }) => (
+  <Grommet>
+    {news.map((news) => {
+      console.log(category, news);
+      return (
+        <Box pad="large" align="center" justify="center">
+          <Accordion>
+            <AccordionPanel label={category.name}>
+              {/* <Carousel></Carousel> */}
+            </AccordionPanel>
+          </Accordion>
+        </Box>
+      );
+    })}
+  </Grommet>
+);
 
 const customTheme = {
   carousel: {

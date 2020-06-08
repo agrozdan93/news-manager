@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useEffect, setState, useState } from "react";
 import { Box, Header, Anchor, Button } from "grommet";
 import { Link } from "react-router-dom";
-// import { Attraction, Car } from "grommet-icons";
-// import { grommet } from "grommet/themes";
 
 const NavItems = () => (
   <Box direction="row" gap="medium">
@@ -17,14 +15,37 @@ const NavItems = () => (
   </Box>
 );
 
-const Navbar = () => {
+const Navbar = ({ chooseStateForNewsData, select }) => {
+  // const [select] = useState(Boolean);
+
+  const handleClick = (e) => {
+    console.log("handled", e, e.target.innerText, select);
+    chooseStateForNewsData(e.target.innerText);
+    e.persist();
+  };
+
   return (
     <div theme={{ global: { colors: { doc: "#ff99cc" } } }} className="App">
       <Header as="header" pad="small" elevation="small" height="xxsmall">
         <NavItems />
         <Box direction="row" gap="medium">
-          <Button size="small" label="GB" active />
-          <Button size="small" label="US" />
+          <Link to="/">
+            <Button
+              size="small"
+              primary={handleClick}
+              label="US"
+              onClick={handleClick}
+            />
+          </Link>
+          <Link to="/">
+            <Button
+              size="small"
+              label="GB"
+              primary={handleClick}
+              onClick={handleClick}
+            />
+          </Link>
+          {/* <Button size="small" label="US" /> */}
         </Box>
       </Header>
     </div>

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { TextInput, Form } from "grommet";
 import News from "../news/News";
+
+import NewsContext from "../context/news/newsContext";
 
 const Search = () => {
   const [news, setNews] = useState([]);
@@ -9,17 +11,45 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState("");
 
+  const newsList = useContext(NewsContext);
+
+  const createGuid = () => {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return (
+      s4() +
+      s4() +
+      "-" +
+      s4() +
+      "-" +
+      s4() +
+      "-" +
+      s4() +
+      "-" +
+      s4() +
+      s4() +
+      s4()
+    );
+  };
+
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
-      )
-      .then((res) => {
-        setNews(res.data.articles);
-        setLoading(false);
-      })
-      .catch((err) => console.log);
+    console.log("Search", newsList);
+    // setLoading(true);
+    // axios
+    //   .get(
+    //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
+    //   )
+    //   .then((res) => {
+    //     res.data.articles.map((news) => {
+    //       news.id = createGuid();
+    //     });
+    //     setNews(res.data.articles);
+    //     setLoading(false);
+    //   })
+    //   .catch((err) => console.log);
   }, []);
 
   const getUserInput = (e) => {
@@ -51,7 +81,9 @@ const Search = () => {
         />
         <div>
           {userInput ? (
-            <News loading={loading} news={searchedNews} />
+            <NewsContext value={searchedNews}>
+              <News loading={loading} />
+            </NewsContext>
           ) : (
             <News loading={loading} news={[]} />
           )}

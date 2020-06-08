@@ -6,7 +6,7 @@ import NewsAccordion from "../shared/NewsAccordion";
 class Categories extends Component {
   state = {
     news: [],
-    categories: ["business", "health"],
+    categories: [{ name: "business" }, { name: "health" }],
     loading: false,
   };
 
@@ -19,13 +19,13 @@ class Categories extends Component {
       `https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=${process.env.REACT_APP_NEWSAPI_API_KEY}`
     );
     let business = res.data.articles.slice(0, 5);
+    // business.category = "business";
+
     let health = res2.data.articles.slice(0, 5);
+    // health.category = "health";
 
     this.setState({
-      news: [
-        { category: "business", business: business },
-        { category: "health", health: health },
-      ],
+      news: [business, health],
       loading: false,
     });
   }

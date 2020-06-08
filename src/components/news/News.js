@@ -1,26 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
+import NewsContext from "../context/news/newsContext";
 
-const News = ({ loading, news }) => {
-  let key = 0;
+const News = ({ loading }) => {
+  const newsList = useContext(NewsContext);
+
+  console.log(newsList);
+
   if (loading) {
     return <Spinner />;
   } else {
-    console.log(news);
     return (
       <div style={newsCardStyle}>
-        {news.map((news) => (
-          <NewsItem
-            key={
-              news.source.id === null || news.source.id === news.source.id
-                ? key++
-                : news.source.id
-            }
-            id={key}
-            news={news}
-          />
+        {newsList.news.map((singleNews, index) => (
+          <NewsItem key={index} news={singleNews} />
         ))}
       </div>
     );
